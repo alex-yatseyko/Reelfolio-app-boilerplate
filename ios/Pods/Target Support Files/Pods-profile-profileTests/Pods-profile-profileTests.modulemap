@@ -1,0 +1,6 @@
+module Pods_profile_profileTests {
+  umbrella header "Pods-profile-profileTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

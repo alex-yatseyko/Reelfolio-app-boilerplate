@@ -1,0 +1,6 @@
+module Pods_profile {
+  umbrella header "Pods-profile-umbrella.h"
+
+  export *
+  module * { export * }
+}
