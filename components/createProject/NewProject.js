@@ -21,7 +21,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-export const NewProject = ({ navigation: { goBack } }) => {
+export const NewProject = ({ navigation }) => {
 
     const [keyboardIsOpen, setKeyboardIsOpen] = useState(false)
 
@@ -46,18 +46,20 @@ export const NewProject = ({ navigation: { goBack } }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      {/* <SafeAreaView> */}
           <View style={styles.container}> 
 
             <View style={styles.header}>
                 <TouchableOpacity
-                    onPress={() => goBack()} 
+                    onPress={() => navigation.goBack()} 
                 >
                     <Image source={require('../../assets/back.png')}/>
                 </TouchableOpacity>
 
                 <Text style={styles.topBarTitle}>ADD NEW PROJECT</Text>
-                <TouchableOpacity style={styles.updBtn}> 
+                <TouchableOpacity 
+                  style={styles.updBtn}
+                  onPress={() => {navigation.navigate('Upcoming')}}
+                > 
                     <Text>Next</Text>
                 </TouchableOpacity>
             </View>
@@ -81,13 +83,9 @@ export const NewProject = ({ navigation: { goBack } }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#191919',
-    // backgroundColor: '#4161D3',
     flex: 1,
   },
-
-
   content: {
-    // flex: 1,
     height: Dimensions.get('window').height,
     justifyContent: 'center',
     alignItems: 'center',
@@ -103,6 +101,7 @@ const styles = StyleSheet.create({
     marginTop: 26,
     marginBottom: 10,
     fontSize: 16,
+    // paddingHorizontal: 25,
   },
 
 

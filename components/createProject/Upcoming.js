@@ -21,58 +21,43 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-export const Upcoming = ({ navigation: { goBack } }) => {
+export const Upcoming = ({ navigation }) => {
 
-    const [keyboardIsOpen, setKeyboardIsOpen] = useState(false)
-
-    useEffect(() => {
-        Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
-        Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
-
-        return () => {
-            Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
-            Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
-        };
-    })
-
-    const _keyboardDidShow = () => {
-        setKeyboardIsOpen(true)
-    }
-
-    const _keyboardDidHide = () => {
-        setKeyboardIsOpen(false)
-    }
+  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false)
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      {/* <SafeAreaView> */}
           <View style={styles.container}> 
-
             <View style={styles.header}>
-                <TouchableOpacity
-                    onPress={() => goBack()} 
+                <TouchableOpacity 
+                  onPress={() => navigation.goBack()} 
+                  style={styles.backBtn}
                 >
                     <Image source={require('../../assets/back.png')}/>
                 </TouchableOpacity>
 
                 <Text style={styles.topBarTitle}>ADD NEW PROJECT</Text>
-                <TouchableOpacity style={styles.updBtn}> 
+                <TouchableOpacity style={styles.updBtn}
+                  onPress={() => {navigation.navigate('Category')}}
+                > 
                     <Text>Next</Text>
                 </TouchableOpacity>
             </View>
 
 
             <View style={[styles.content, keyboardIsOpen ? {height: Dimensions.get('window').height / 1.5} : {height: Dimensions.get('window').height}  ]}>
-                <Text style={styles.blockTitle}>Where can we find it?</Text>
-                <View style={styles.inputWrapper}>
-                    <TextInput 
-                        autoFocus={true}
-                        style={styles.input}
-                        selectionColor={'white'}
-                    />
-                </View>
-                </View>
+                <Image style={styles.projectImage} source={require('../../assets/project/preview.png')}/>
+                <Text style={styles.gray}>Title</Text>
+                <Text style={styles.white}>Will Ervin</Text>
+                <View style={styles.border}/>
+                <Text style={styles.gray}>Log Line</Text>
+                <Text style={styles.white}>this is a short description of my movie</Text>
+                <View style={styles.border}/>
+                <Text style={styles.gray}>Description</Text>
+                <Text style={styles.white}>What else do you want people to know? Ex. total run time, year, inspiration for the film</Text>
+                <View style={styles.border}/>
+              </View>
           </View>
     </>
   );
@@ -81,32 +66,29 @@ export const Upcoming = ({ navigation: { goBack } }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#191919',
-    // backgroundColor: '#4161D3',
     flex: 1,
   },
-
-
-  content: {
-    // flex: 1,
-    height: Dimensions.get('window').height,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },    
-  inputWrapper: {
-    width: Dimensions.get('window').width - 100,
-    borderBottomColor: 'rgba(255, 255, 255, 0.3);',
-    borderBottomWidth: 1,
+  border: {
+    backgroundColor: 'rgba(196, 196, 196, 0.24)',
+    height: 1,
+    width: Dimensions.get('window').width - 40,
   },
-  input: {
-    color: '#6A6A6A',
+  white: {
+    color: '#fff',
     textAlign: 'center',
-    marginTop: 26,
-    marginBottom: 10,
-    fontSize: 16,
+    width: Dimensions.get('window').width - 140,
+    paddingBottom: 40,
   },
-
-
-
+  gray: {
+    color: 'rgba(255, 255, 255, 0.37)',
+    paddingTop: 40,
+    paddingBottom: 10,
+  },
+  content: {
+    height: Dimensions.get('window').height,
+    alignItems: 'center',
+    marginTop: 60,
+  },    
   header: {
     flexDirection: 'row',
     borderBottomColor: 'rgba(255, 255, 255, 0.3);',
@@ -137,9 +119,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     paddingVertical: 6,
   },
-  blockTitle: {
-    color: '#fff',
-    fontSize: 15,
-    textAlign: 'center'
-    },
+  backBtn: {
+    borderRadius: 6,
+    paddingHorizontal: 9,
+    paddingVertical: 6,
+  },
+  projectImage: {
+    width: Dimensions.get('window').width,
+  }
 });

@@ -19,27 +19,9 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-export const Category = ({ navigation: { goBack } }) => {
+export const Category = ({ navigation }) => {
 
     const [keyboardIsOpen, setKeyboardIsOpen] = useState(false)
-
-    useEffect(() => {
-        Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
-        Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
-
-        return () => {
-            Keyboard.removeListener("keyboardDidShow", _keyboardDidShow);
-            Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
-        };
-    })
-
-    const _keyboardDidShow = () => {
-        setKeyboardIsOpen(true)
-    }
-
-    const _keyboardDidHide = () => {
-        setKeyboardIsOpen(false)
-    }
 
   return (
     <>
@@ -48,13 +30,15 @@ export const Category = ({ navigation: { goBack } }) => {
 
             <View style={styles.header}>
                 <TouchableOpacity
-                    onPress={() => goBack()} 
+                    onPress={() => navigation.goBack()} 
                 >
                     <Image source={require('../../assets/back.png')}/>
                 </TouchableOpacity>
 
                 <Text style={styles.topBarTitle}>ADD NEW PROJECT</Text>
-                <TouchableOpacity style={styles.updBtn}> 
+                <TouchableOpacity style={styles.updBtn}
+                  onPress={() => {navigation.navigate('TagCrew')}}
+                > 
                     <Text>Next</Text>
                 </TouchableOpacity>
             </View>

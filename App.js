@@ -39,8 +39,8 @@ const App: () => React$Node = () => {
       {/* <SafeAreaView> */}
       <ProfileNav.Navigator>
         <ProfileNav.Screen name="AddNew" component={addNewProject} options={{ headerShown: false}} />
-        <ProfileNav.Screen name="Profile" component={Profile} options={{ headerShown: false}} />
         <ProfileNav.Screen name="Project" component={Project} options={{ headerShown: false}} />
+        <ProfileNav.Screen name="Profile" component={Profile} options={{ headerShown: false}} />
         <ProfileNav.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false}} />
       </ProfileNav.Navigator>
       {/* </SafeAreaView> */}
