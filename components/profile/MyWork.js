@@ -11,6 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 
+
 export const MyWork = () => {
     return (
         <View style={styles.projectsWrapper}>
